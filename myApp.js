@@ -24,7 +24,7 @@ let Person;
 
 const createAndSavePerson = (done) => {
   Person = User();
-  done(null /*, data*/);
+  done(null , data);
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
