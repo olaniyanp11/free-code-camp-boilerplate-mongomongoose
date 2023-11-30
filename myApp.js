@@ -8,22 +8,15 @@ let app = express();
 app.use(express({ urlencoded: true }));
 app.use(express.json());
 
-mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((error) => {
-    console.error("Error connecting to MongoDB:", error.message);
-  });
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 let Person;
 
 const createAndSavePerson = (done) => {
-  Person = User
+  Person = User;
   done(null /*, data*/);
 };
 
