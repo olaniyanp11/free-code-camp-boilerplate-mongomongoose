@@ -1,9 +1,29 @@
-require('dotenv').config();
+require("dotenv").config();
+let mongoose = require("mongoose");
+let express = require("express");
+let User = require("./models/Person");
+const { urlencoded } = require("body-parser");
 
+let app = express();
+app.use(express({ urlencoded: true }));
+app.use(express.json());
+
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error.message);
+  });
 
 let Person;
 
 const createAndSavePerson = (done) => {
+  Person = User
   done(null /*, data*/);
 };
 
