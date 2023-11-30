@@ -23,7 +23,7 @@ mongoose
 let Person;
 
 const createAndSavePerson = (done) => {
-  Person = User;
+  Person = User();
   done(null /*, data*/);
 };
 
