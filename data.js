@@ -1,0 +1,17 @@
+const dataarray = [
+  { name: "Alice", age: 25, favoriteFoods: ["Pizza", "Ice Cream"] },
+  { name: "Bob", age: 30, favoriteFoods: ["Burger", "Spaghetti"] },
+  { name: "Charlie", age: 28, favoriteFoods: ["Sushi", "Chocolate"] },
+  { name: "David", age: 35, favoriteFoods: ["Steak", "Salad"] },
+  { name: "Eva", age: 22, favoriteFoods: ["Tacos", "Cheesecake"] },
+  { name: "Frank", age: 40, favoriteFoods: ["BBQ", "Pasta"] },
+  { name: "Grace", age: 27, favoriteFoods: ["Curry", "Donuts"] },
+  { name: "Harry", age: 33, favoriteFoods: ["Fish and Chips", "Cupcakes"] },
+  { name: "Ivy", age: 29, favoriteFoods: ["Ramen", "Fruit Salad"] },
+  { name: "Jack", age: 26, favoriteFoods: ["Nachos", "Brownies"] },
+  { name: "Kelly", age: 31, favoriteFoods: ["Chicken Wings", "Apple Pie"] },
+  { name: "Leo", age: 24, favoriteFoods: ["Tiramisu", "Hot Dogs"] },
+  { name: "Mia", age: 37, favoriteFoods: ["Pancakes", "Mango"] },
+  { name: "Nathan", age: 32, favoriteFoods: ["Shawarma", "Gelato"] },
+  { name: "Olivia", age: 28, favoriteFoods: ["Tofu Stir-Fry", "Blueberries"] },
+];

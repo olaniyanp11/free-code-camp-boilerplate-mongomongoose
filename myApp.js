@@ -3,6 +3,8 @@ let mongoose = require("mongoose");
 let express = require("express");
 // let PersonSchema = require("./models/Person");
 const { urlencoded } = require("body-parser");
+let dataarray = require("./data")
+
 
 let app = express();
 app.use(express({ urlencoded: true }));
@@ -59,9 +61,16 @@ const createManyPeople = (arrayOfPeople, done) => {
     }
   });
 };
-
+// createManyPeople(dataarray, (err, data) => {
+//   if (err) {
+//     console.error(`Error creating multiple data: ${err}`);
+//   } else {
+//     console.log("Multiple data created successfully");
+//     // Handle the created data as needed
+//   }
+// });
 const findPeopleByName = (personName, done) => {
-  let data = Person.findOne({ name: personName }, (err, data) => {
+  let data = Person.find({ name: personName }, (err, data) => {
     if (err) {
       console.error(err);
       done(err);
