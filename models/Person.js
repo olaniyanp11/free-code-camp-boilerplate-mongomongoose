@@ -6,7 +6,7 @@ let personSchema = mongoose.Schema({
     require: true,
   },
   age: Number,
-  favoriteFoods: String,
+  favoriteFoods: [String],
 });
 let Person = mongoose.model("Person", personSchema);
 module.exports = Person;

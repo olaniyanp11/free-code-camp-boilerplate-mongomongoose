@@ -1,12 +1,25 @@
 require("dotenv").config();
 let mongoose = require("mongoose");
 let express = require("express");
-let User = require("./models/Person");
+// let PersonSchema = require("./models/Person");
 const { urlencoded } = require("body-parser");
 
 let app = express();
 app.use(express({ urlencoded: true }));
 app.use(express.json());
+
+
+/**
+ * models
+ */
+let personSchema = mongoose.Schema({
+  name: {
+    type: String,
+    require: true,
+  },
+  age: Number,
+  favoriteFoods: [String],
+});
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -21,9 +34,9 @@ mongoose
   });
 
 let Person;
-
+Person = mongoose.model("Person", personSchema);
 const createAndSavePerson = (done) => {
-  Person = User();
+  Person = PersonSchema;
   done(null , data);
 };
 
