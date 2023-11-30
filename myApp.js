@@ -53,8 +53,7 @@ const createManyPeople = (arrayOfPeople, done) => {
     if (err) {
       console.error(` failed to create multiple data : ${err}`);
       done(err);
-    } else
-      () => {
+    } else{
         done(null, data);
         console.log("multiple data created successfully");
       };
