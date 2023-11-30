@@ -8,7 +8,6 @@ let app = express();
 app.use(express({ urlencoded: true }));
 app.use(express.json());
 
-
 /**
  * models
  */
@@ -35,9 +34,21 @@ mongoose
 
 let Person;
 Person = mongoose.model("Person", personSchema);
+
 const createAndSavePerson = (done) => {
-  Person = PersonSchema;
-  done(null , data);
+  let document = Person({
+    name: "ayo",
+    age: 20,
+    favoriteFoods: ["eba", "rice", "meat"],
+  });
+  document
+    .save(function (err, data) {
+      if (err) {
+        console.log(`failed to save user ${err}`);
+      }
+      else console.log(data);
+    });
+  done(null, data);
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
