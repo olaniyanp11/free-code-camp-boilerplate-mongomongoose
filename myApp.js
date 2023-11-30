@@ -1,10 +1,11 @@
 require("dotenv").config();
 let mongoose = require("mongoose");
 let express = require("express");
-// let PersonSchema = require("./models/Person");
+let personSchema = require("./models/Person");
 const { urlencoded } = require("body-parser");
-let dataarray = require("./data")
-
+let dataarray = require("./data");
+const { find } = require("./models/Person");
+const { log } = require("fcc-express-bground");
 
 let app = express();
 app.use(express({ urlencoded: true }));
@@ -13,14 +14,6 @@ app.use(express.json());
 /**
  * models
  */
-let personSchema = mongoose.Schema({
-  name: {
-    type: String,
-    require: true,
-  },
-  age: Number,
-  favoriteFoods: [String],
-});
 
 mongoose
   .connect(process.env.MONGO_URI, {
@@ -61,14 +54,6 @@ const createManyPeople = (arrayOfPeople, done) => {
     }
   });
 };
-// createManyPeople(dataarray, (err, data) => {
-//   if (err) {
-//     console.error(`Error creating multiple data: ${err}`);
-//   } else {
-//     console.log("Multiple data created successfully");
-//     // Handle the created data as needed
-//   }
-// });
 const findPeopleByName = (personName, done) => {
   let data = Person.find({ name: personName }, (err, data) => {
     if (err) {
@@ -81,18 +66,49 @@ const findPeopleByName = (personName, done) => {
 };
 
 const findOneByFood = (food, done) => {
-  done(null /*, data*/);
+  let data = Person.findOne({ favoriteFoods: food }, (err, data) => {
+    if (err) {
+      console.error(err);
+      done(err);
+    } else if (!data) {
+      console.log("user with food not found");
+    } else done(null, data);
+  });
 };
 
 const findPersonById = (personId, done) => {
-  done(null /*, data*/);
+  let data = Person.findOne({ _id: personId }, (err, data) => {
+    if (err) {
+      console.error(err);
+      done(err);
+    } else if (!data) {
+      console.log("user with id not found");
+    } else done(null, data);
+  });
 };
 
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-
-  done(null /*, data*/);
+  // let data = find(
+  //   { _id: personId },
+  //   { favoriteFoods: foodToAdd },
+  //   (err, data) => {
+  //     if (err) {
+  //       console.error(err);
+  //       done(err);
+  //     } else if (!data) {
+  //       console.log("user with id not found");
+  //     } else done(null, data);
+  //   }
+  // );
 };
+// findEditThenSave("656917d14575a22e348bbb32", (err, data) => {
+//   if (err) {
+//     console.error(err);
+//   } else if (!data) {
+//     console.log("user with id not found");
+//   } else console.log(data);
+// });
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
