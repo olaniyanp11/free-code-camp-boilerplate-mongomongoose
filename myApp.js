@@ -49,7 +49,12 @@ const createAndSavePerson = (done) => {
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+  let document = Person.create(arrayOfPeople);
+  document.save(function (err, data) {
+    if (err) {
+      console.log(` failed to create multiple data : ${err}`);
+    } else done(null, data);
+  });
 };
 
 const findPeopleByName = (personName, done) => {
