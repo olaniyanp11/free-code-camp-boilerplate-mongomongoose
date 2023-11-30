@@ -49,11 +49,15 @@ const createAndSavePerson = (done) => {
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
-  let document = Person.create(arrayOfPeople);
-  document.save(function (err, data) {
+  let document = Person.create(arrayOfPeople, (err, data) => {
     if (err) {
-      console.log(` failed to create multiple data : ${err}`);
-    } else done(null, data);
+      console.error(` failed to create multiple data : ${err}`);
+      done(err);
+    } else
+      () => {
+        done(null, data);
+        console.log("multiple data created successfully");
+      };
   });
 };
 
