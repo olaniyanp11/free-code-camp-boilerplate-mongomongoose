@@ -41,14 +41,11 @@ const createAndSavePerson = (done) => {
     age: 20,
     favoriteFoods: ["eba", "rice", "meat"],
   });
-  document
-    .save(function (err, data) {
-      if (err) {
-        console.log(`failed to save user ${err}`);
-      }
-      else console.log(data);
-    });
-  done(null, data);
+  document.save(function (err, data) {
+    if (err) {
+      console.log(`failed to save user ${err}`);
+    } else done(null, data);
+  });
 };
 
 const createManyPeople = (arrayOfPeople, done) => {
