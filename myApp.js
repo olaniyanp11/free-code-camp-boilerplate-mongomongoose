@@ -53,15 +53,22 @@ const createManyPeople = (arrayOfPeople, done) => {
     if (err) {
       console.error(` failed to create multiple data : ${err}`);
       done(err);
-    } else{
-        done(null, data);
-        console.log("multiple data created successfully");
-      };
+    } else {
+      done(null, data);
+      console.log("multiple data created successfully");
+    }
   });
 };
 
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  let data = Person.findOne({ name: personName }, (err, data) => {
+    if (err) {
+      console.error(err);
+      done(err);
+    } else if (!data) {
+      console.log("user not found");
+    } else done(null, data);
+  });
 };
 
 const findOneByFood = (food, done) => {
