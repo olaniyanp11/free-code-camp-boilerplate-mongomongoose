@@ -89,37 +89,53 @@ const findPersonById = (personId, done) => {
 
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-  // let data = find(
-  //   { _id: personId },
-  //   { favoriteFoods: foodToAdd },
-  //   (err, data) => {
-  //     if (err) {
-  //       console.error(err);
-  //       done(err);
-  //     } else if (!data) {
-  //       console.log("user with id not found");
-  //     } else done(null, data);
-  //   }
-  // );
-  done(null /*, data*/);
+  let user = Person.findOne({ _id: personId }, (err, data) => {
+    if (err) {
+      console.error(err);
+      done(err);
+    } else if (!data) {
+      console.log("user with the id not found");
+    } else {
+      data.favoriteFoods.push(foodToAdd);
+      data.save((err, person) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log("user food updated");
+          done(null, person);
+        }
+      });
+    }
+  });
 };
-// findEditThenSave("656917d14575a22e348bbb32", (err, data) => {
-//   if (err) {
-//     console.error(err);
-//   } else if (!data) {
-//     console.log("user with id not found");
-//   } else console.log(data);
-// });
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
-
-  done(null /*, data*/);
+  find({ name: personName }, { age: ageToSet }, (err, data) => {
+    if (err) {
+      console.error(err);
+      done(err);
+    } else if (!data) {
+      console.log("user with name not found");
+    } else done(null, data);
+  });
 };
 
 const removeById = (personId, done) => {
-  done(null /*, data*/);
+  Person.findOneAndDelete({ _id: personId }, (err, data) => {
+    if (err) console.error(err);
+    else if (!data) console.error("person with id not found");
+    else {
+      console.log("user deleted");
+      done(null, data);
+    }
+  });
 };
+
+// removeById("6569179876ab773b184bef99", (err, data) => {
+//   if (err) console.error(err);
+//   else console.log("user deleted");
+// });
 
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
