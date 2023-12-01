@@ -111,14 +111,18 @@ const findEditThenSave = (personId, done) => {
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
-  Person.findOneAndUpdate({ name: personName }, { age: ageToSet }, (err, data) => {
-    if (err) {
-      console.error(err);
-      done(err);
-    } else if (!data) {
-      console.log("user with name not found");
-    } else done(null, data);
-  });
+  Person.findOneAndUpdate(
+    { name: personName },
+    { age: ageToSet },
+    (err, data) => {
+      if (err) {
+        console.error(err);
+        done(err);
+      } else if (!data) {
+        console.log("user with name not found");
+      } else done(null, data);
+    }
+  );
 };
 
 const removeById = (personId, done) => {
@@ -132,20 +136,21 @@ const removeById = (personId, done) => {
   });
 };
 
-// removeById("6569179876ab773b184bef99", (err, data) => {
-//   if (err) console.error(err);
-//   else console.log("user deleted");
-// });
-
 const removeManyPeople = (done) => {
   const nameToRemove = "Mary";
-
-  done(null /*, data*/);
+  Person.remove({ name: nameToRemove }, (err, valid) => {
+    if (err) {
+      console.error(err);
+      done(err);
+    } else {
+      done(null, valid);
+    }
+  });
 };
 
 const queryChain = (done) => {
   const foodToSearch = "burrito";
-
+  
   done(null /*, data*/);
 };
 
